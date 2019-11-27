@@ -1,5 +1,5 @@
 {
-  "name": "wave-header",
+  "name": "@wpdas/wave-header",
   "version": "1.0.0",
   "description": "Generates, Reads and Rewrites a WAVE-file header. ",
   "main": "index.js",
