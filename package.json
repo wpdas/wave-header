@@ -1,0 +1,34 @@
+{
+  "name": "wave-header",
+  "version": "1.0.0",
+  "description": "Generates, Reads and Rewrites a WAVE-file header. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wpdas/wave-header.git"
+  },
+  "keywords": [
+    "wave",
+    "wav",
+    "header",
+    "generates",
+    "reads",
+    "rewrites",
+    "ffmpeg",
+    "stream",
+    "fix",
+    "filseSize",
+    "dataLength",
+    "correction"
+  ],
+  "author": "Wenderson Pires",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wpdas/wave-header/issues"
+  },
+  "homepage": "https://github.com/Wpdas/wave-header#readme",
+  "devDependencies": {}
+}
