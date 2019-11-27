@@ -9,10 +9,10 @@
  */
 const generateHeader = (length, options) => {
   options = options || {};
-  const RIFF = new Buffer('RIFF');
-  const WAVE = new Buffer('WAVE');
-  const fmt = new Buffer('fmt ');
-  const data = new Buffer('data');
+  const RIFF = Buffer.alloc(4, 'RIFF');
+  const WAVE = Buffer.alloc(4, 'WAVE');
+  const fmt = Buffer.alloc(4, 'fmt ');
+  const data = Buffer.alloc(4, 'data');
 
   const MAX_WAV = 4294967295 - 100;
   const format = 1; // raw PCM
@@ -23,7 +23,7 @@ const generateHeader = (length, options) => {
   const headerLength = 44;
   const dataLength = length || MAX_WAV;
   const fileSize = dataLength + headerLength;
-  const header = new Buffer(headerLength);
+  const header = Buffer.alloc(headerLength);
   let offset = 0;
 
   RIFF.copy(header, offset);
@@ -144,7 +144,7 @@ const readHeader = buffer => {
 const cleanUpOldHeader = buffer => {
   const FINAL_HEADER_OFFSET = 44;
 
-  const cleanedBuffer = new Buffer(buffer.length - FINAL_HEADER_OFFSET);
+  const cleanedBuffer = Buffer.alloc(buffer.length - FINAL_HEADER_OFFSET);
   cleanedBuffer.copy(buffer.slice(FINAL_HEADER_OFFSET, buffer.length));
 
   return cleanedBuffer;
@@ -158,18 +158,15 @@ const cleanUpOldHeader = buffer => {
  * @returns {Buffer}  Returns buffer containing the new header and wave samples from the original buffer
  */
 const rewriteHeaderInBufferChunk = (waveHeaderBuffer, buffer) => {
-  let finalBuffer;
   let bufferChunks = [];
 
   if (buffer.length >= waveHeaderBuffer.length) {
     bufferChunks.push(waveHeaderBuffer);
     bufferChunks.push(cleanUpOldHeader(buffer));
-    finalBuffer = Buffer.concat(bufferChunks);
+    return Buffer.concat([waveHeaderBuffer, cleanUpOldHeader(buffer)]);
   } else {
     throw new Error('Audio header buffer chunk is empty.');
   }
-
-  return finalBuffer;
 };
 
 module.exports = {
