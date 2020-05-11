@@ -144,7 +144,7 @@ const readHeader = buffer => {
 const cleanUpOldHeader = buffer => {
   const FINAL_HEADER_OFFSET = 44;
 
-  const cleanedBuffer = Buffer.alloc(buffer.length - FINAL_HEADER_OFFSET);
+  const cleanedBuffer = Buffer.alloc(buffer.length - FINAL_HEADER_OFFSET, buffer);
   cleanedBuffer.copy(buffer.slice(FINAL_HEADER_OFFSET, buffer.length));
 
   return cleanedBuffer;
