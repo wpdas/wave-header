@@ -158,11 +158,7 @@ const cleanUpOldHeader = buffer => {
  * @returns {Buffer}  Returns buffer containing the new header and wave samples from the original buffer
  */
 const rewriteHeaderInBufferChunk = (waveHeaderBuffer, buffer) => {
-  let bufferChunks = [];
-
   if (buffer.length >= waveHeaderBuffer.length) {
-    bufferChunks.push(waveHeaderBuffer);
-    bufferChunks.push(cleanUpOldHeader(buffer));
     return Buffer.concat([waveHeaderBuffer, cleanUpOldHeader(buffer)]);
   } else {
     throw new Error('Audio header buffer chunk is empty.');
